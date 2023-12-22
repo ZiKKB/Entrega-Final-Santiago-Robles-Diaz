@@ -6,7 +6,7 @@ from .models import Avatar
 
 class AutoFormulario(forms.Form):
     Marca = forms.CharField()
-    Modelo = forms.IntegerField()
+    Modelo = forms.CharField()
 
 
 class AutoBuscarFormulario(forms.Form):

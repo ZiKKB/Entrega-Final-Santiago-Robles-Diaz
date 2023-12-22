@@ -34,7 +34,7 @@ def autos_buscar_view(request):
         if formulario.is_valid():
             informacion = formulario.cleaned_data
             cursos_filtrados = []
-            for auto in Auto.objects.filter(auto=informacion["auto"]):
+            for auto in auto.objects.filter(auto=informacion["auto"]):
                 cursos_filtrados.append(auto)
 
             contexto = {"autos": cursos_filtrados}
@@ -46,7 +46,7 @@ def autos_todos_view(request):
     for curso in Curso.objects.all():
         todos_los_cursos.append(curso)
 
-    contexto = {"cursos": todos_los_cursos}
+    contexto = {"autos": todos_los_cursos}
     return render(request, "AppCoder/cursos_list.html", contexto)
 
 
@@ -64,7 +64,7 @@ def autos_view(request):
         formulario = AutoFormulario(request.POST)
         if formulario.is_valid():
             informacion = formulario.cleaned_data
-            modelo = Auto(curso=informacion["curso"], camada=informacion["camada"])
+            modelo = modelo(auto=informacion["marca"], modelo=informacion["modelo"])
             modelo.save()
 
         return redirect("AppCoder:inicio")
@@ -98,10 +98,10 @@ def marca_view(request):
         if formulario.is_valid():
             informacion = formulario.cleaned_data
             modelo = Marca(
-                nombre=informacion["nombre"],
-                apellido=informacion["apellido"],
-                email=informacion["email"],
-                profesion=informacion["profesion"]
+                marca=informacion["marca"],
+                modelo=informacion["modelo"],
+                color=informacion["color"],
+                categoria=informacion["categoria"]
             )
             modelo.save()
         return render(
@@ -110,39 +110,39 @@ def marca_view(request):
         )
 
 @login_required
-def profesores_crud_read_view(request):
-    profesores = Marca.objects.all()
-    return render(request, "AppCoder/profesores_lista.html", {"profesores": profesores})
+def marcas_crud_read_view(request):
+    marcas = Marca.objects.all()
+    return render(request, "AppCoder/marcas_lista.html", {"marcas": marcas})
 
 @login_required
-def profesores_crud_delete_view(request, profesor_email):
+def marcas_crud_delete_view(request, profesor_email):
     profesor_a_eliminar = Marca.objects.filter(email=profesor_email).first()
     profesor_a_eliminar.delete()
-    return profesores_crud_read_view(request)
+    return marcas_crud_read_view(request)
 
 @login_required
 def profesores_crud_update_view(request, profesor_email):
-    profesor = Marca.objects.filter(email=profesor_email).first()
+    marca = Marca.objects.filter(email=profesor_email).first()
     if request.method == "GET":
         formulario = MarcaFormulario(
             initial={
-                "nombre": profesor.nombre,
-                "apellido": profesor.apellido,
-                "email": profesor.email,
-                "profesion": profesor.profesion
+                "marca": marca.marca,
+                "modelo": marca.modelo,
+                "color": marca.color,
+                "categoria": marca.categoria,
             }
         )
-        return render(request, "AppCoder/profesores_formulario_edicion.html", {"form": formulario, "profesor": profesor})
+        return render(request, "AppCoder/marcas_formulario_edicion.html", {"form": formulario, "marca": marca})
     else:
         formulario = MarcaFormulario(request.POST)
         if formulario.is_valid():
             informacion = formulario.cleaned_data
-            profesor.nombre=informacion["nombre"]
-            profesor.apellido=informacion["apellido"]
-            profesor.email=informacion["email"]
-            profesor.profesion=informacion["profesion"]
-            profesor.save()
-        return profesores_crud_read_view(request)
+            marca.marca=informacion["marca"]
+            marca.modelo=informacion["modelo"]
+            marca.color=informacion["color"]
+            marca.categoria=informacion["categoria"]
+            marca.save()
+        return marcas_crud_read_view(request)
 
 ####################  ClassBasedViews (CBV)  - Vistas basadas en Clases #########################################
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView

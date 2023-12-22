@@ -8,8 +8,8 @@ from AppCoder.views import (
     inicio_view,
     profesores_view,
     ### CRUD
-    profesores_crud_delete_view,
-    profesores_crud_read_view,
+    marcas_crud_delete_view,
+    marcas_crud_read_view,
     profesores_crud_update_view,
     marca_view,
     CursoCreateView,
@@ -38,8 +38,8 @@ urlpatterns = [
     path("inicio/", inicio_view, name="inicio"),
     ###### CRUD
     path("marcas/", marca_view),
-    path("marcas-lista/", profesores_crud_read_view),
-    path("profesores-eliminar/<profesor_email>/", profesores_crud_delete_view),
+    path("marcas/lista", marcas_crud_read_view),
+    path("profesores-eliminar/<profesor_email>/", marcas_crud_delete_view),
     path("profesores-editar/<profesor_email>/", profesores_crud_update_view),
     ###### CBV
     path("curso/list", CursoListView.as_view(), name="curso-list"),
