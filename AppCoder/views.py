@@ -64,8 +64,8 @@ def autos_view(request):
         formulario = AutoFormulario(request.POST)
         if formulario.is_valid():
             informacion = formulario.cleaned_data
-            modelo = modelo(auto=informacion["marca"], modelo=informacion["modelo"])
-            modelo.save()
+            marca = marca(marca=informacion["marca"], modelo=informacion["modelo"])
+            marca.save()
 
         return redirect("AppCoder:inicio")
 

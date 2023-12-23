@@ -67,10 +67,10 @@
 <div class="content-container">
     <h2>Aquí va la lista de Autos!</h2>
 
-    {% if cursos %}
+    {% if autos %}
     <ul>
-        {% for curso in cursos %}
-        <li>{{ curso.curso }} ({{ curso.camada }})</li>
+        {% for auto in autos %}
+        <li>{{ auto.marca }} ({{ auto.modelo }})</li>
         {% endfor %}
     </ul>
     {% else %}
