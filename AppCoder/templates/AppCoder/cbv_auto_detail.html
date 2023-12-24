@@ -1,0 +1,38 @@
+{% extends "AppCoder/padre.html" %}
+{% block contenidoQueCambia %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    h1 {
+        color: navy;
+        text-align: center;
+    }
+    .auto-details {
+        background-color: lightgray;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+    }
+    a {
+        background-color: blue;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        display: inline-block;
+        margin-top: 20px;
+    }
+    a:hover {
+        background-color: darkblue;
+    }
+</style>
+
+<div class="auto-details">
+    <p>{{ nombre }}</p>
+    <h1>Detalle del auto</h1>
+    <p>{{ auto.marca }} - modelo: {{ auto.modelo }}</p>
+    <a href="{% url 'AppCoder:auto-list' %}">Regresar</a>
+</div>
+
+{% endblock %}
