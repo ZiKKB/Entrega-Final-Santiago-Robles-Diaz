@@ -183,6 +183,9 @@ class AutoDeleteView(LoginRequiredMixin, DeleteView):
 ###Login / Logout 
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+from django.urls import reverse
 
 def login_view(request):
 
@@ -225,8 +228,9 @@ def login_view(request):
 
 
 def logout_view(request):
-    pass
-
+    logout(request)
+    
+    return redirect(reverse("AppCoder/logout"))
 
 from .forms import UserCreationFormulario, UserEditionFormulario
 from django.contrib.auth.views import PasswordChangeView

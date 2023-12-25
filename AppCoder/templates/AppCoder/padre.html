@@ -22,17 +22,15 @@
             <div class="container">
                 {% if user.is_authenticated %}
                     <a class="navbar-brand" href="/AppCoder/inicio/">Inicio</a>
-                    <a class="navbar-brand" href="/AppCoder/autos/">Cargar Auto</a> 
-                       
+                    <a class="navbar-brand" href="/AppCoder/autos/">Cargar Auto</a>  
                     <a class="navbar-brand" href="/AppCoder/autos/buscar">Buscar Auto</a>
                     <a class="navbar-brand" href="/AppCoder/autos/todos">Todos los Autos</a>
-                    
                     <a class="navbar-brand" href="/AppCoder/marcas/">Marcas</a>
                     <a class="navbar-brand" href="/AppCoder/marcas/lista">Todas las Marcas</a>
                     <a class="navbar-text" href="{% url 'AppCoder:editar-perfil' %}">editar perfil: {{ user.username }}</a>
                     <a class="navbar-text" href="{% url 'AppCoder:crear-avatar' %}">crear avatar</a>
                     <img src="{{ avatar_url }}" style="height: 40px; width: auto; border-radius: 50%; vertical-align: middle;"/>
-                    <a class="navbar-text" href="{% url 'AppCoder:logout' %}">Logout</a>
+                    <a class="navbar-text" href="{% url 'AppCoder:logout' %}">Cerrar sesión</a>
                 {% else %}
                     <a class="navbar-brand" href="{% url 'AppCoder:login' %}">Login</a>
                     <a class="navbar-brand" href="{% url 'AppCoder:registro' %}">Registrar usuario</a>
